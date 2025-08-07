@@ -1,1 +1,102 @@
+1. What is Jenkins, and how is it used in CI/CD?
+Jenkins is an open-source automation server that is widely used for continuous integration and continuous delivery/deployment (CI/CD). It automates parts of the software development process, especially building, testing, and deploying code.
 
+In CI/CD:
+Continuous Integration (CI): Jenkins automatically builds and tests code every time a developer pushes changes to version control (like Git). This helps catch bugs early.
+
+Continuous Delivery (CD): Jenkins can be configured to deploy the tested code to staging or production environments.
+
+It supports hundreds of plugins to integrate with various tools (GitHub, Docker, Kubernetes, Maven, etc.).
+
+2. What is a Jenkinsfile?
+A Jenkinsfile is a text file that contains the pipeline code used by Jenkins to define and execute CI/CD processes.
+
+Key Points:
+Written in Groovy-based DSL (Domain Specific Language).
+
+It is stored in the root of your source code repository.
+
+Allows versioning of your build process alongside your code.
+
+Two types: Declarative and Scripted (explained later).
+
+3. How do you create and configure Jenkins pipelines?
+You can create Jenkins pipelines in two main ways:
+
+a) Using Jenkins UI (Classic method):
+Go to Jenkins Dashboard > New Item > Pipeline.
+
+Configure the pipeline in the GUI.
+
+You can add your pipeline script directly in the "Pipeline" section.
+
+b) Using a Jenkinsfile (recommended):
+Create a Jenkinsfile in your source code repo.
+
+Define your pipeline stages and steps in it.
+
+Use a Multibranch Pipeline job in Jenkins to automatically scan branches with Jenkinsfiles.
+
+Configuration typically includes:
+Selecting the source code repo (Git, GitHub, Bitbucket, etc.)
+
+Setting up triggers (e.g., build on push)
+
+Defining environment variables, tools (e.g., JDK, Maven), and credentials.
+
+4. What are some common stages in a Jenkins pipeline?
+A pipeline is usually broken down into stages, each containing steps. Common stages include:
+
+Stage	Purpose
+Checkout	Pull the latest code from the source control system
+Build	Compile the source code (e.g., using Maven, Gradle, npm)
+Test	Run unit tests, integration tests, etc.
+Code Analysis	Static code analysis (e.g., using SonarQube)
+Package	Create an artifact (e.g., JAR, WAR, Docker image)
+Deploy	Deploy to test, staging, or production environments
+Notify	Send notifications (email, Slack) about build status
+
+5. What is the difference between a declarative and scripted Jenkins pipeline?
+Feature	Declarative Pipeline	Scripted Pipeline
+Syntax	High-level, predefined structure	Low-level, full Groovy scripting
+Ease of Use	Easier, cleaner, more readable	More flexible, but more complex
+Best For	Most common CI/CD tasks	Complex logic or advanced use cases
+Structure Required	Yes (e.g., pipeline { ... })	No strict structure, more free-form
+Error Handling	Built-in stages and steps with simplified flow	Requires manual error handling
+
+Declarative:
+pipeline {
+    agent any
+    stages {
+        stage('Build') {
+            steps {
+                echo 'Building...'
+            }
+        }
+        stage('Test') {
+            steps {
+                echo 'Testing...'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Deploying...'
+            }
+        }
+    }
+}
+
+
+Scripted:
+
+node {
+    stage('Build') {
+        echo 'Building...'
+    }
+    stage('Test') {
+        echo 'Testing...'
+    }
+    stage('Deploy') {
+        echo 'Deploying...'
+    }
+}
