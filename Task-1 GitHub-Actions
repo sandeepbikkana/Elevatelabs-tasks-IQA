@@ -1,1 +1,110 @@
 
+DAY - 1     
+***
+2. What is CI/CD?
+
+CI/CD stands for Continuous Integration and Continuous Deployment/Delivery:
+
+Continuous Integration (CI): Automatically builds and tests your code whenever you push changes. It helps detect issues early.
+
+Continuous Deployment/Delivery (CD):
+
+Delivery means changes are automatically prepared for release but require manual approval.
+
+Deployment means changes are automatically released to production without manual intervention.
+
+3. How do GitHub Actions work?
+
+GitHub Actions is a CI/CD tool built into GitHub. It works using:
+
+Workflows: YAML files that define automation rules.
+
+Events: Trigger the workflow (e.g., push, pull_request, release).
+
+Jobs: Define a set of steps to run in sequence or parallel.
+
+Steps: Individual tasks within a job (e.g., running a script or installing dependencies).
+GitHub Actions listens for events in your repo and runs workflows accordingly using runners.
+
+4. What are runners?
+
+Runners are the machines (virtual or self-hosted) that execute the jobs in a GitHub Actions workflow.
+
+GitHub-hosted runners: Managed by GitHub, include common tools.
+
+Self-hosted runners: Your own machines; offer more control and customization.
+
+5. Difference between jobs and steps:
+
+Feature		Jobs					                     Steps
+Scope		  High-level unit in a workflow		   Sub-tasks within a job
+Runs on		A specific runner (VM)             Same runner as the job
+Parallel	Can run in parallel			           Run sequentially in order
+Context		Has own environment			           Share context and workspace
+
+6. How to secure secrets in GitHub Actions?
+
+Use GitHub Secrets:
+
+Go to your repo → Settings → Secrets and variables → Actions.
+
+Add sensitive data (like API keys).
+
+Access secrets in workflow using:
+
+yaml
+
+env:
+  API_KEY: ${{ secrets.API_KEY }}
+Secrets are encrypted and not visible in logs unless explicitly echoed.
+
+7. How to handle deployment errors?
+
+Best practices:
+
+Fail fast: Use continue-on-error: false (default) to stop the workflow on failure.
+
+Use try/catch in scripts to handle errors gracefully.
+
+Slack/Email alerts for failures using notification actions.
+
+Rollback strategy: Revert to the last stable release (e.g., previous Docker image or deployment).
+
+8. Explain the Docker build-push workflow:
+
+Typical steps in GitHub Actions:
+
+yaml
+
+steps:
+  - uses: actions/checkout@v4
+  - name: Log in to Docker Hub
+    run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+  - name: Build Docker image
+    run: docker build -t myapp:latest .
+  - name: Push Docker image
+    run: docker push myapp:latest
+Summary:
+
+Authenticate with Docker registry.
+
+Build the image using docker build.
+
+Push it to a registry like Docker Hub or GitHub Container Registry.
+
+9. How can you test a CI/CD pipeline locally?
+
+Ways to test locally:
+
+act: CLI tool that runs GitHub Actions locally using Docker.
+
+bash
+
+act push
+Docker Compose or shell scripts: Recreate steps manually.
+
+Use debug logging in workflows:
+
+yaml
+
+run: echo "Value: ${{ secrets.SOME_SECRET }}"
