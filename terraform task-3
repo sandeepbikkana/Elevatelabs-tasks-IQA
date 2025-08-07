@@ -1,0 +1,88 @@
+
+1. What is IaC?
+Infrastructure as Code (IaC) is the practice of managing and provisioning computing infrastructure through machine-readable configuration files rather than manual setup. It allows you to version, automate, and reproduce infrastructure consistently using code.
+
+2. How does Terraform work?
+Terraform works by:
+
+Reading configuration files written in HCL (HashiCorp Configuration Language).
+
+Communicating with providers (e.g., AWS, Azure, GCP) to determine the desired state.
+
+Comparing the current state (via the state file) with the desired state (from your configuration).
+
+Creating an execution plan to reach the desired state.
+
+Applying changes to infrastructure based on the plan.
+
+3. What is Terraform state file?
+The Terraform state file (terraform.tfstate):
+
+Stores information about the current infrastructure managed by Terraform.
+
+Helps Terraform understand the mapping between your configuration and real-world resources.
+
+Is required for planning and applying changes.
+
+Can be stored locally or remotely (e.g., in an S3 bucket) for team collaboration.
+
+4. Difference between terraform plan and terraform apply:
+Command	Purpose
+terraform plan	Shows what actions Terraform will take without making changes. It's a preview.
+terraform apply	Applies the changes and provisions or updates infrastructure. It's the execution step.
+
+5. What are Terraform providers?
+Providers are plugins in Terraform that:
+
+Interact with APIs of cloud platforms (like AWS, Azure, GCP), SaaS services, or other tools.
+
+Allow Terraform to create, read, update, and delete resources in those systems.
+
+Each provider must be declared in your configuration to use its resources.
+
+Example:
+
+provider "aws" {
+  region = "us-east-1"
+}
+
+6. What is resource dependency?
+Resource dependency refers to the order in which resources should be created or destroyed based on their interrelations.
+
+Terraform handles dependencies by:
+
+Automatically detecting them via resource references.
+
+Using a dependency graph to apply changes in the correct order.
+
+Example:
+
+resource "aws_instance" "web" {
+  subnet_id = aws_subnet.main.id  # Depends on the subnet resource
+}
+7. How do you handle secret variables?
+Sensitive or secret variables (like passwords, tokens) can be managed by:
+
+Using sensitive = true in variable definitions.
+
+Storing secrets in environment variables or external secret managers (e.g., AWS Secrets Manager, Vault).
+
+Using .tfvars files (excluded from version control) to store secrets.
+
+Avoiding printing secrets in logs or outputs by marking variables/outputs as sensitive.
+
+8. Explain the benefits of Terraform.
+Key benefits of using Terraform include:
+
+Platform agnostic: Works with many cloud providers and services.
+
+Declarative syntax: Define what you want, not how to do it.
+
+Version control: Infrastructure can be tracked and versioned like code.
+
+Reusable modules: Promote DRY (Don't Repeat Yourself) practices.
+
+Immutable infrastructure: Encourages safe, consistent changes.
+
+Automation: Reduces manual errors and increases productivity.
+
