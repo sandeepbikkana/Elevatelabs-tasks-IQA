@@ -1,0 +1,78 @@
+1. What is Git?
+Git is a distributed version control system that helps developers track changes in source code, collaborate on projects, and manage code history. It allows multiple people to work on the same project without overwriting each other's work.
+
+2. What is the difference between merge and rebase?
+Feature	Merge	Rebase
+Purpose	Combine branches, keep history	Reapply commits for cleaner history
+Result	Creates a merge commit	Rewrites commit history
+Use Case	When preserving history	When you want linear history
+
+merge: Keeps all commits and shows true history.
+
+rebase: Rewrites commits to make history linear (but can be dangerous if not used carefully).
+
+3. What is a Pull Request (PR)?
+A pull request is a GitHub (or Git-based) feature where you propose changes from one branch to another (usually from feature to main or dev). It allows team members to review, discuss, and approve code before merging.
+
+4. How do you resolve merge conflicts?
+Git marks conflicting lines with <<<<<<<, =======, and >>>>>>>.
+
+Manually edit the files to resolve conflicts.
+
+Use:
+
+bash:
+git add .
+git commit -m "Resolved merge conflicts"
+Continue with the merge or rebase.
+
+Tools like VSCode, GitKraken, or git mergetool can help visually resolve conflicts.
+
+5. What are Git Tags?
+Git tags are named references to specific commits, often used to mark release points (like v1.0, v2.0-beta).
+
+Create a tag:
+
+bash :
+git tag v1.0
+Push it:
+
+bash :
+git push origin v1.0
+6. What is Git Workflow?
+A Git workflow is a set of practices that teams follow for using Git collaboratively. Common workflows:
+
+Feature Branch Workflow: Use separate branches for each feature.
+
+Gitflow Workflow: Structured branching (main, develop, feature/*, release/*, hotfix/*).
+
+Forking Workflow: Used in open source – contributors fork and create PRs.
+
+7. Explain git stash.
+git stash temporarily saves uncommitted changes so you can switch branches without losing your work.
+
+Save changes:
+
+bash:
+git stash
+List stashes:
+
+bash:
+git stash list
+Apply latest:
+
+bash:
+git stash apply
+8. What is the use of .gitignore?
+The .gitignore file tells Git which files or folders to ignore (not track or commit).
+
+Examples:
+
+gitignore
+Copy
+Edit
+node_modules/
+*.log
+.env
+__pycache__/
+Useful for ignoring build files, dependencies, secrets, etc.
