@@ -1,0 +1,45 @@
+#GITHUB pages
+
+1. What is GitHub Pages?
+GitHub Pages is a free hosting service from GitHub that lets you publish static websites directly from a GitHub repository. It’s commonly used for portfolios, documentation, and simple project pages.
+
+2. Can you host dynamic apps here?
+Not directly. GitHub Pages only supports static content (HTML, CSS, JavaScript).
+
+You can use client-side JavaScript to fetch data from APIs.
+
+Server-side features (like PHP, databases, or Python backends) aren’t supported.
+
+3. What are the limits of GitHub Pages?
+
+Size limit per repository: 1 GB.
+
+Published site size limit: ~1 GB.
+
+Bandwidth limit: 100 GB/month.
+
+Build limit: 10 builds per hour (for automatic Jekyll builds).
+
+Only supports HTTPS (which is a plus).
+
+4. How do you update the website?
+
+Push new commits to the branch GitHub Pages is using (usually main or gh-pages).
+
+GitHub automatically rebuilds and deploys the updated site.
+
+5. What happens when you delete the repo?
+
+The GitHub Pages site is deleted immediately (and the URL becomes inactive).
+
+There’s no automatic backup — you’d need to have your files stored locally or elsewhere.
+
+6. What is the default file that loads?
+
+index.html in the site’s root folder (or in /docs if you configured Pages to use that).
+
+If no index.html is found, it will show a directory listing (unless blocked) or a 404 page.
+
+7. Can you use a custom domain?
+Yes. You can configure a custom domain in the repo’s Pages settings and point your domain’s DNS to GitHub’s servers. Supports both HTTP and HTTPS (via free SSL from GitHub).
+
