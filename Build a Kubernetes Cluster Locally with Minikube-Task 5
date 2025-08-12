@@ -1,0 +1,62 @@
+1. What is Kubernetes?
+Kubernetes (K8s) is an open-source container orchestration platform that automates deploying, scaling, and managing containerized applications. It handles scheduling, load balancing, self-healing, and service discovery for containers (commonly Docker containers).
+
+2. What is the role of kubelet?
+The kubelet is an agent that runs on each node in a Kubernetes cluster.
+
+It makes sure containers are running as defined in PodSpecs.
+
+It talks to the API server to get workload instructions and reports back node & pod status.
+
+It does not manage containers that weren’t created by Kubernetes.
+
+3. Explain pods, deployments, and services.
+
+Pod: The smallest deployable unit in Kubernetes, usually containing one or more tightly coupled containers that share storage and network.
+
+Deployment: A higher-level abstraction that manages replicas of pods, handles scaling, and updates.
+
+Service: An abstraction that provides a stable network identity and load balancing to a set of pods.
+
+4. How do you scale in Kubernetes?
+
+Manual scaling:
+
+kubectl scale deployment my-app --replicas=5
+Auto-scaling (HPA – Horizontal Pod Autoscaler): Scales pods based on CPU/memory usage or custom metrics.
+
+5. What is a namespace?
+A namespace is a logical partition within a cluster used to group and isolate resources (pods, services, etc.).
+
+Useful for multi-tenant environments, separating dev/staging/prod, and resource quotas.
+
+6. Difference between ClusterIP, NodePort, LoadBalancer:
+
+ClusterIP (default): Service is accessible only inside the cluster.
+
+NodePort: Exposes service on a static port on all cluster nodes (<NodeIP>:<NodePort>).
+
+LoadBalancer: Integrates with cloud providers to provision an external load balancer that routes traffic to your service.
+
+7. What are ConfigMaps?
+ConfigMaps store non-confidential configuration data in key-value pairs.
+
+Used to decouple configuration from container images.
+
+Can be injected into pods as environment variables or mounted as files.
+
+8. How do you perform rolling updates?
+
+Update the deployment spec (e.g., change image version).
+
+Kubernetes gradually replaces old pods with new ones while keeping the application running.
+
+
+kubectl set image deployment/my-app my-container=my-image:v2
+kubectl rollout status deployment/my-app
+Supports rollback if something goes wrong:
+
+bash
+Copy
+Edit
+kubectl rollout undo deployment/my-app
